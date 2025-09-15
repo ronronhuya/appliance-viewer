@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Filtered Appliance Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      text-align: center;
+      padding: 40px;
+    }
+
+    /* Filter buttons */
+    .filter-buttons {
+      margin-bottom: 30px;
+    }
+
+    .filter-buttons button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      background-color: #2563eb;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    .filter-buttons button:hover {
+      background-color: #1e40af;
+    }
+
+    /* Grid layout for appliances */
+    .appliance-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .appliance {
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #fff;
+      padding: 20px;
+      transition: transform 0.3s;
+    }
+
+    .appliance:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .appliance img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .info-box {
+      display: none;
+      margin-top: 15px;
+      text-align: left;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      font-size: 18px;
+      margin: 10px 0 5px;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Filter Appliances by Category</h1>
+
+  <!-- Filter Buttons -->
+  <div class="filter-buttons">
+    <button onclick="filterAppliances('all')">All Appliances</button>
+    <button onclick="filterAppliances('kitchen')">Kitchen Appliances</button>
+    <button onclick="filterAppliances('cooling')">Cooling Appliances</button>
+  </div>
+
+  <!-- Appliance Grid -->
+  <div class="appliance-container">
+
+    <!-- Microwave -->
+    <div class="appliance kitchen">
+      <img src="https://images.philips.com/is/image/philipsconsumer/HD9252_90-IMS-en_PH?$jpglarge$&wid=960" 
+           alt="Microwave" onclick="toggleInfo(this)">
+      <div class="info-box">
+        <h2>Microwave Oven</h2>
+        <p><strong>Model:</strong> Philips HD9252/90</p>
+        <p><strong>Power:</strong> 900W</p>
+        <p><strong>Features:</strong> Touch Control, Auto Cook</p>
+        <p><strong>Price:</strong> $199</p>
+      </div>
+    </div>
+
+    <!-- Mini Oven -->
+    <div class="appliance kitchen">
+      <img src="https://m.media-amazon.com/images/I/71d6TtA49XL._AC_SL1500_.jpg" 
+           alt="Mini Oven" onclick="toggleInfo(this)">
+      <div class="info-box">
+        <h2>Mini Oven</h2>
+        <p><strong>Model:</strong> Black+Decker TO1313SBD</p>
+        <p><strong>Power:</strong> 1150W</p>
+        <p><strong>Features:</strong> Bake, Toast, Broil</p>
+        <p><strong>Price:</strong> $49.99</p>
+      </div>
+    </div>
+
+    <!-- Refrigerator -->
+    <div class="appliance kitchen cooling">
+      <img src="https://images.lg.com/us/images/refrigerators/md07524777/gallery/desktop-01.jpg" 
+           alt="Refrigerator" onclick="toggleInfo(this)">
+      <div class="info-box">
+        <h2>Refrigerator</h2>
+        <p><strong>Model:</strong> LG 260L Frost Free</p>
+        <p><strong>Type:</strong> Double Door</p>
+        <p><strong>Capacity:</strong> 260L</p>
+        <p><strong>Features:</strong> Smart Inverter, Moist Crisper</p>
+        <p><strong>Price:</strong> $699</p>
+      </div>
+    </div>
+
+    <!-- Air Conditioner -->
+    <div class="appliance cooling">
+      <img src="https://m.media-amazon.com/images/I/71FJJgikKQL._AC_SL1500_.jpg" 
+           alt="Air Conditioner" onclick="toggleInfo(this)">
+      <div class="info-box">
+        <h2>Air Conditioner</h2>
+        <p><strong>Model:</strong> LG Dual Inverter</p>
+        <p><strong>Cooling:</strong> 1.5 Ton</p>
+        <p><strong>Features:</strong> Auto Clean, AI Cooling</p>
+        <p><strong>Price:</strong> $599</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Toggle info box on image click
+    function toggleInfo(imgElement) {
+      const infoBox = imgElement.nextElementSibling;
+      if (infoBox.style.display === "block") {
+        infoBox.style.display = "none";
+      } else {
+        infoBox.style.display = "block";
+        infoBox.style.animation = "fadeIn 0.4s ease forwards";
+      }
+    }
+
+    // Filter appliances by category
+    function filterAppliances(category) {
+      const allAppliances = document.querySelectorAll('.appliance');
+      allAppliances.forEach(appliance => {
+        if (category === 'all') {
+          appliance.classList.remove('hidden');
+        } else if (appliance.classList.contains(category)) {
+          appliance.classList.remove('hidden');
+        } else {
+          appliance.classList.add('hidden');
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
+("e.g Appliances Webpage")
